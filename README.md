@@ -4,6 +4,7 @@
 
 【実装済み。】<br>
 ・img.lazy要素の変換<br>
+・インラインスタイルから共通cssのクラス名への変換
 ・amp-imgの必須属性を記述する<br>
 ・inline styleの削除<br>
 ・inline scriptの削除<br>
