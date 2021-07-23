@@ -78,6 +78,8 @@ func MakeStartorSelfClosingTag(content string, attrs []html.Attribute, tagType i
 				styles = append(styles, v)
 			} else if k == "class" {
 				classes = append(classes, v)
+			} else if k == "onclick" {
+				continue
 			} else {
 				others[k] = v
 			}
@@ -88,7 +90,11 @@ func MakeStartorSelfClosingTag(content string, attrs []html.Attribute, tagType i
 			tags = nil
 			tags = append(tags, "<", content, " class=\"", strings.Join(classes, ""), "\"", " ")
 			for k, v := range others {
+				if k == "onclick" {
+					continue
+				} else {
 				tags = append(tags, k, "=\"", v, "\"", " ")
+				}
 			}
 		}
 		if content == "img" {
