@@ -60,13 +60,11 @@ func GetHtmlDividedByTagAmp(str string) []HtmlToken {
 	return nil
 }
 
-//Make〇〇Tag系メソッドは、"<img src="https://~">"のような文字列を返す。
 func MakeStartorSelfClosingTag(content string, attrs []html.Attribute, tagType int) (string, int) {
 	var tags []string
 	tags = append(tags, "<", content, " ")
 	if content == "style" || content == "script" {
 		return "", 1
-		//attrがnilでない場合の処理
 		//attrをループさせて、style,class属性の値を保持する。
 	} else if attrs != nil {
 		//styleとclassの中身を入れるsliceを用意する。
@@ -83,13 +81,9 @@ func MakeStartorSelfClosingTag(content string, attrs []html.Attribute, tagType i
 			} else {
 				others[k] = v
 			}
-			//とりあえずこのループで作っておく
 			tags = append(tags, k, "=\"", v, "\"", " ")
 		}
-		//img,style, script,テキスト部以外かつインラインスタイルありのタグの処理。
 		if styles != nil {
-			//　style属性がある場合、一度tagsをリセットする。
-			//stylesとclassesを渡してclassesを返す
 			classes = ConvertStyleToClass(styles, classes)
 			tags = nil
 			tags = append(tags, "<", content, " class=\"", strings.Join(classes, ""), "\"", " ")
@@ -103,7 +97,7 @@ func MakeStartorSelfClosingTag(content string, attrs []html.Attribute, tagType i
 		}
 	}
 	//共通処理
-	//最後の要素が"" "のため
+	//最後の要素が" "のため
 	tags = tags[0 : len(tags)-1]
 	if tagType == 0 {
 		tags = append(tags, ">")
